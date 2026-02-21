@@ -4,19 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- title of the page -->
     <title>Assignment-04</title>
+
     <!-- tailwind css -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- daisyUI LINK -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
     <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- gont awesome cdn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *{
+            font-family: "Geist", sans-serif;
+        }
+    </style>
 </head>
 
 <body class="bg-[#F8FAFC] px-25">
@@ -39,20 +51,21 @@
     </header>
 
     <main class="container mx-auto pt-15 pb-15">
-        <div>
+        <div class="">
             <div class="flex justify-between">
                 <h2 class="font-bold text-[#002C5C] text-xl pb-6">Available Jobs</h2>
-                <p class="font-bold">8 jobs</p>
+                <p class="font-semibold text-[#64748B] text-[16px]">8 jobs</p>
             </div>
             <div class="flex justify-items-start gap-4">
-                <button class="btn btn-soft btn-accent w-[100px] border border-black">All</button>
-                <button class="btn btn-neutral btn-outline">Interview</button>
+                <button id="btn-all" class="btn btn-soft btn-accent w-[100px] border border-black">All</button>
 
-                <button class="btn btn-neutral btn-outline">Rejected</button>
+                <button id="interview-btn" class="btn btn-neutral btn-outline">Interview</button>
+
+                <button id="rejected-btn" class="btn btn-neutral btn-outline">Rejected</button>
             </div>
         </div>
 
-        <div class="hidden">
+        <div id="all-cards" class="cards">
             <div class="relative bg-[#FFFFFF] p-5 rounded-xl mt-5 shadow">
                 <div class="">
                     <h3 class="text-[#002C5C] font-bold text-xl">Mobile First Corp</h3>
@@ -231,17 +244,17 @@
 
         </div>
 
-        <div class="bg-[#FFFFFF] px-10 py-15 shadow rounded-xl mt-4">
+        <div id="no-job-available" hidden class="bg-[#FFFFFF] px-10 py-15 shadow rounded-xl mt-4">
             <div class=" text-center ">
                 <div class="flex justify-center">
                     <img class="" src="img/jobs.png" alt="">
                 </div>
-                <h2>No jobs available</h2>
-                <p>Check back soon for new job opportunities</p>
+                <h2 class="text-[#002C5C] font-semibold text-2xl leading-8">No jobs available</h2>
+                <p class="text-[#64748B] text-[16px] ">Check back soon for new job opportunities</p>
             </div>
         </div>
     </main>
+<script src="file.js"></script>
 </body>
-
 </html>
 
