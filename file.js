@@ -69,9 +69,10 @@ function toggleStyle(id) {
             filterSection.classList.remove('hidden');
             reanderInterview();
             jobCount.innerText = interviewList.length + " jobs";
-            jobCount.style.color = "green";
+            jobCount.style.color = "#00D100";
         }
     }
+
     else if (id == 'btn-all') {
         allCards.classList.remove('hidden');
         filterSection.classList.add('hidden');
@@ -79,6 +80,7 @@ function toggleStyle(id) {
         jobCount.innerText = allCards.children.length + " jobs";
         jobCount.style.color = '#64748B'; 
     }
+        
     else if (id == 'rejected-btn') {
         if (rejectedList.length == 0) {
             noJobSection.classList.remove('hidden');
@@ -188,10 +190,21 @@ mainContainer.addEventListener('click', function (event) {
     }
 
     else if (event.target.classList.contains('delate')) {
-        const parentNode = event.target.parentNode.parentNode.parentNode;
+        const parentNode = event.target.closest('.card');
         // console.log(parentNode);
-        // console.log('delate btn clicked');
-        // parentNode.classList.add('hidden');
+        parentNode.remove();
+        
+        totalCount.innerText = allCards.children.length;
+        jobCount.innerText = allCards.children.length + " jobs";
+
+        if (currentStatus == "interview-btn") {
+            interviewCount.innerText = filterSection.children.length;
+            jobCount.innerText = filterSection.children.length + " jobs";
+        }
+        else if (currentStatus == "rejected-btn") {
+            rejectedCount.innerText = filterSection.children.length;
+            jobCount.innerText = filterSection.children.length + " jobs";
+        }
 
     }
 })
@@ -202,7 +215,7 @@ function reanderInterview() {
 
     for (const interview of interviewList) {
         let div = document.createElement("div");
-        div.className = 'relative bg-[#FFFFFF] p-5 rounded-xl mt-5 shadow';
+        div.className = 'card relative bg-[#FFFFFF] p-5 rounded-xl mt-5 shadow';
         div.innerHTML = `
             <div class="">
                     <h3 class="job-name text-[#002C5C] font-bold text-xl">${interview.jobName}</h3>
@@ -217,7 +230,7 @@ function reanderInterview() {
                 </div>
                 <div class="absolute top-4 right-4">
                     <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
-                            class="fa-solid fa-trash-can"></i></button>
+                            class="delate fa-solid fa-trash-can"></i></button>
                 </div>
         `;
         filterSection.appendChild(div);
@@ -230,7 +243,7 @@ function reanderRejected() {
 
     for (const rejected of rejectedList) {
         let div = document.createElement("div");
-        div.className = 'relative bg-[#FFFFFF] p-5 rounded-xl mt-5 shadow';
+        div.className = 'card relative bg-[#FFFFFF] p-5 rounded-xl mt-5 shadow';
         div.innerHTML = `
             <div class="">
                     <h3 class="job-name text-[#002C5C] font-bold text-xl">${rejected.jobName}</h3>
@@ -245,7 +258,7 @@ function reanderRejected() {
                 </div>
                 <div class="absolute top-4 right-4">
                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
-                            class="fa-solid fa-trash-can"></i></button>
+                            class="delate fa-solid fa-trash-can"></i></button>
                 </div>
         `;
         filterSection.appendChild(div);
