@@ -25,9 +25,10 @@ let currentStatus = "all";
 
 function calculateCount() {
     totalCount.innerText = allCards.children.length;
-    jobCount.innerText = allCards.children.length + " jobs";
     interviewCount.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
+
+    jobCount.innerText = allCards.children.length + " jobs";
 }
 calculateCount();
 
@@ -59,38 +60,49 @@ function toggleStyle(id) {
             noJobSection.classList.remove('hidden');
             allCards.classList.add('hidden');
             filterSection.classList.add('hidden');
+            jobCount.innerText = interviewList.length + " jobs";
+            jobCount.style.color = '#64748B'; 
         }
         else if (interviewList.length > 0) {
             noJobSection.classList.add('hidden');
             allCards.classList.add('hidden');
             filterSection.classList.remove('hidden');
             reanderInterview();
+            jobCount.innerText = interviewList.length + " jobs";
+            jobCount.style.color = "green";
         }
     }
     else if (id == 'btn-all') {
         allCards.classList.remove('hidden');
         filterSection.classList.add('hidden');
         noJobSection.classList.add('hidden');
+        jobCount.innerText = allCards.children.length + " jobs";
+        jobCount.style.color = '#64748B'; 
     }
     else if (id == 'rejected-btn') {
         if (rejectedList.length == 0) {
             noJobSection.classList.remove('hidden');
             allCards.classList.add('hidden');
             filterSection.classList.add('hidden');
+            jobCount.innerText = rejectedList.length + " jobs";
+            jobCount.style.color = '#64748B';
         }
         else if (rejectedList.length > 0) {
             noJobSection.classList.add('hidden');
             allCards.classList.add('hidden');
             filterSection.classList.remove('hidden');
             reanderRejected();
+            jobCount.innerText = rejectedList.length + " jobs";
+            jobCount.style.color = "red";
         }
     }
 }
 
-
+// event delegation of main container----
 mainContainer.addEventListener('click', function (event) {
     if (event.target.classList.contains('interview-button')) {
         const parentNode = event.target.parentNode.parentNode;
+        // console.log(parentNode);
 
         const jobName = parentNode.querySelector(".job-name").innerText;
 
@@ -173,6 +185,14 @@ mainContainer.addEventListener('click', function (event) {
         }
 
         calculateCount();
+    }
+
+    else if (event.target.classList.contains('delate')) {
+        const parentNode = event.target.parentNode.parentNode.parentNode;
+        // console.log(parentNode);
+        // console.log('delate btn clicked');
+        // parentNode.classList.add('hidden');
+
     }
 })
 
