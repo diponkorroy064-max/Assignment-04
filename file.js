@@ -196,12 +196,20 @@ mainContainer.addEventListener('click', function (event) {
         if (currentStatus == "interview-btn") {
             interviewCount.innerText = filterSection.children.length;
             jobCount.innerText = filterSection.children.length + " jobs";
+
+            if(filterSection.children.length == 0) {
+                noJobSection.classList.remove('hidden');
+            }
         }
+        
         else if (currentStatus == "rejected-btn") {
             rejectedCount.innerText = filterSection.children.length;
             jobCount.innerText = filterSection.children.length + " jobs";
-        }
 
+            if (filterSection.children.length == 0) {
+                noJobSection.classList.remove('hidden');
+            }
+        }
     }
 })
 
@@ -225,7 +233,7 @@ function reanderInterview() {
                     </div>
                 </div>
                 <div class="absolute top-4 right-4">
-                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
+                    <button class="delate btn border px-2.5 py-2 rounded-full opacity-70"><i
                             class="delate fa-solid fa-trash-can"></i></button>
                 </div>
         `;
@@ -253,7 +261,7 @@ function reanderRejected() {
                     </div>
                 </div>
                 <div class="absolute top-4 right-4">
-                   <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
+                   <button class="delate btn border px-2.5 py-2 rounded-full opacity-70"><i
                             class="delate fa-solid fa-trash-can"></i></button>
                 </div>
         `;
