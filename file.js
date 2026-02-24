@@ -137,10 +137,6 @@ mainContainer.addEventListener('click', function (event) {
         // removing the jobname from rejectedList----
         rejectedList = rejectedList.filter(item => item.jobName != cardInfo.jobName);
 
-
-        // console.log(rejectedList);
-
-
         if (currentStatus == "rejected-btn") {
             reanderRejected();
         }
@@ -193,7 +189,7 @@ mainContainer.addEventListener('click', function (event) {
         const parentNode = event.target.closest('.card');
         // console.log(parentNode);
         parentNode.remove();
-        
+
         totalCount.innerText = allCards.children.length;
         jobCount.innerText = allCards.children.length + " jobs";
 
