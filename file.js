@@ -144,8 +144,10 @@ mainContainer.addEventListener('click', function (event) {
         calculateCount();
 
         if (currentStatus == 'rejected-btn') {
-            noJobSection.classList.remove('hidden');
             jobCount.innerText = filterSection.children.length + " rejection";
+            if (filterSection.children.length == 0) {
+                noJobSection.classList.remove('hidden');
+            }
         }
         else if (currentStatus == 'interview-btn') {
             jobCount.innerText = filterSection.children.length + " interview";
@@ -193,8 +195,11 @@ mainContainer.addEventListener('click', function (event) {
         calculateCount();
 
         if (currentStatus == 'interview-btn') {
-            noJobSection.classList.remove('hidden');
+            // noJobSection.classList.remove('hidden');
             jobCount.innerText = filterSection.children.length + " interview";
+            if (filterSection.children.length == 0) {
+                noJobSection.classList.remove('hidden');
+            }
         }
         else if (currentStatus == 'rejected-btn') {
             jobCount.innerText = filterSection.children.length + " rejection";
