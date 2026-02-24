@@ -147,6 +147,9 @@ mainContainer.addEventListener('click', function (event) {
             noJobSection.classList.remove('hidden');
             jobCount.innerText = filterSection.children.length + " rejection";
         }
+        else if (currentStatus == 'interview-btn') {
+            jobCount.innerText = filterSection.children.length + " interview";
+        }
     }
 
     else if (event.target.classList.contains('rejected-button')) {
@@ -193,6 +196,9 @@ mainContainer.addEventListener('click', function (event) {
             noJobSection.classList.remove('hidden');
             jobCount.innerText = filterSection.children.length + " interview";
         }
+        else if (currentStatus == 'rejected-btn') {
+            jobCount.innerText = filterSection.children.length + " rejection";
+        }
     }
 
     else if (event.target.classList.contains('delate')) {
@@ -202,6 +208,10 @@ mainContainer.addEventListener('click', function (event) {
 
         totalCount.innerText = allCards.children.length;
         jobCount.innerText = allCards.children.length + " jobs";
+
+        if (allCards.children.length == 0) {
+            noJobSection.classList.remove('hidden');
+        }
 
         if (currentStatus == "interview-btn") {
             interviewCount.innerText = filterSection.children.length;
@@ -220,8 +230,11 @@ mainContainer.addEventListener('click', function (event) {
                 noJobSection.classList.remove('hidden');
             }
         }
+
     }
 })
+
+
 
 //step-3: html file create----
 function reanderInterview() {
