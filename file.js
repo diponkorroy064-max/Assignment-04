@@ -32,13 +32,14 @@ const rejectedCount = document.getElementById('rejectedCount');
 
 let interviewList = [];
 let rejectedList = [];
+let currentStatus = "all";
 
 function calculateCount() {
     totalCount.innerText = cardSection.children.length;
     interviewCount.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
 }
-calculateCount();
+
 
 const mainContainer = document.querySelector('main');
 // console.log(mainContainer);
@@ -63,6 +64,8 @@ function toggleStyle(id) {
     let selected = document.getElementById(id);
     // console.log(selected);
 
+    currentStatus = id;
+
     // add black background for current button ----
     selected.classList.add("bg-[#3B82F6]", "text-white");
     selected.classList.remove("text-[#64748B]", "bg-white");
@@ -72,18 +75,24 @@ function toggleStyle(id) {
         allCards.classList.add('hidden');
         filterSection.classList.remove('hidden');
     }
-    else if (id == 'btn-all') {
+    else if (id == 'btn-all'){
         allCards.classList.remove('hidden');
         filterSection.classList.add('hidden');
+    }
+    else if (id == 'rejected-btn') {
+        allCards.classList.add('hidden');
+        filterSection.classList.remove('hidden');
+        reanderRejected();
     }
 
 }
 
 
 mainContainer.addEventListener('click', function(event) {
-    if (event.target.classList.contains('interview-btn')) {
-        const parentNode = event.target.parentNode.parentNode;
+    if (event.target.classList.contains('interview-button')) {
+        const parentNode = event.target.parentNode;
         // console.log(parentNode);
+
         const jobName = document.querySelector(".job-name").innerText;
         // console.log(jobName);
 
@@ -92,25 +101,74 @@ mainContainer.addEventListener('click', function(event) {
         const condition = document.querySelector(".condition").innerText;
         const description = document.querySelector(".description").innerText;
 
+        parentNode.querySelector(".condition").innerText = "Interview";
+
         const cardInfo = {
             jobName,
             jobTitle,
             salary,
-            condition,
+            condition: "Interview",
             description
         }
         // console.log(cardInfo);
 
         const jobExist = interviewList.find(item => item.jobName == cardInfo.jobName);
-        parentNode.querySelector(".condition").innerText = "Interview";
+        
 
         if (!jobExist) {
             interviewList.push(cardInfo);
         }
 
-        reanderInterview();
+        rejectedList = rejectedList.filter(item => item.jobName != cardInfo.jobName);
+
+        calculateCount();
+
+        if (currentStatus == "rejected-btn") {
+            reanderRejected();
+        }
+
     }
-    
+
+
+    else if (event.target.classList.contains('rejected-button')){
+        const parentNode = event.target.parentNode;
+        // console.log(parentNode);
+
+        const jobName = document.querySelector(".job-name").innerText;
+        // console.log(jobName);
+
+        const jobTitle = document.querySelector(".job-title").innerText;
+        const salary = document.querySelector(".salary").innerText;
+        const condition = document.querySelector(".condition").innerText;
+        const description = document.querySelector(".description").innerText;
+
+        parentNode.querySelector(".condition").innerText = "Rejected";
+
+        const cardInfo = {
+            jobName,
+            jobTitle,
+            salary,
+            condition: "Rejected",
+            description
+        }
+        // console.log(cardInfo);
+
+        const jobExist = rejectedList.find(item => item.jobName == cardInfo.jobName);
+
+
+        if (!jobExist) {
+            rejectedList.push(cardInfo);
+        }
+
+        interviewList = interviewList.filter(item => item.jobName != cardInfo.jobName);
+
+        calculateCount();
+
+        if (currentStatus == "interview-btn") {
+            reanderInterview();
+        }
+
+    }
 })
 
 
@@ -124,14 +182,11 @@ function reanderInterview() {
         div.className = 'relative bg-[#FFFFFF] p-5 rounded-xl mt-5 shadow';
         div.innerHTML = `
             <div class="">
-                    <h3 class="job-name text-[#002C5C] font-bold text-xl">Mobile First Corp</h3>
-                    <p class="job-title text-[#64748B]">React Native Developer</p>
-                    <p class="salary text-[#64748B]">Remote • Full-time • $130,000 - $175,000</p>
-                    <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">NOT APPLIED</p>
-                    <p class="description text-[#565a5f] pt-4">Build cross-platform mobile applications using React Native. Work on
-                        products used by millions of
-                        users worldwide.
-                    </p>
+                    <h3 class="job-name text-[#002C5C] font-bold text-xl">${interview.jobName}</h3>
+                    <p class="job-title text-[#64748B]">${interview.jobTitle}</p>
+                    <p class="salary text-[#64748B]">${interview.salary}</p>
+                    <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">${interview.condition}</p>
+                    <p class="description text-[#565a5f] pt-4">${interview.description}</p>
                     <br>
                     <button class="btn text-green-500 border-green-500">INTERVIEW</button>
                     <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
@@ -144,7 +199,30 @@ function reanderInterview() {
     }
 }
 
+function reanderRejected() {
+    filterSection.innerText = "";
 
+    for (const rejected of rejectedList) {
+        let div = document.createElement("div");
+        div.className = 'relative bg-[#FFFFFF] p-5 rounded-xl mt-5 shadow';
+        div.innerHTML = `
+            <div class="">
+                    <h3 class="job-name text-[#002C5C] font-bold text-xl">${rejected.jobName}</h3>
+                    <p class="job-title text-[#64748B]">${rejected.jobTitle}</p>
+                    <p class="salary text-[#64748B]">${rejected.salary}</p>
+                    <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">${rejected.condition}</p>
+                    <p class="description text-[#565a5f] pt-4">${rejected.description}</p>
+                    <br>
+                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
+                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                </div>
+                <div class="absolute top-4 right-4 border p-2 rounded-full opacity-70">
+                    <i class="fa-solid fa-trash-can"></i>
+                </div>
+        `;
+        filterSection.appendChild(div);
+    }
+}
 
 
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- title of the page -->
-    <title>Assignment-04</title>
+    <title>Job Application Tracker</title>
 
     <!-- tailwind css -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -24,8 +24,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
     <!-- fabicon -->
-     <link rel="shortcut icon" href="img/icons8-job-64.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/icons8-job-64.png" type="image/x-icon">
     <style>
         * {
             font-family: "Geist", sans-serif;
@@ -56,11 +57,12 @@
 
         <!-- Available jobs & buttons section -->
         <div class="">
+            <!-- available job section -->
             <div class="flex justify-between">
                 <h2 class="font-bold text-[#002C5C] text-xl pb-6">Available Jobs</h2>
                 <p class="font-semibold text-[#64748B] text-[16px]">0 jobs</p>
             </div>
-
+            <!-- Button section -->
             <div class="flex justify-items-start gap-4">
                 <button onclick="toggleStyle('btn-all')" id="btn-all"
                     class="btn py-2 px-6 rounded-md bg-[#3B82F6] text-white shadow">All</button>
@@ -74,9 +76,9 @@
         </div>
 
         <!-- filtered card -->
-         <section id="filter-section" class="hidden">
+        <section id="filter-section" class="hidden">
 
-         </section>
+        </section>
 
         <!-- all cards section -->
         <div id="all-cards" class="cards">
@@ -88,16 +90,18 @@
                     <p class="job-title text-[#64748B]">React Native Developer</p>
                     <p class="salary text-[#64748B]">Remote • Full-time • $130,000 - $175,000</p>
                     <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">NOT APPLIED</p>
-                    <p class="description text-[#565a5f] pt-4">Build cross-platform mobile applications using React Native. Work on
+                    <p class="description text-[#565a5f] pt-4">Build cross-platform mobile applications using React
+                        Native. Work on
                         products used by millions of
                         users worldwide.
                     </p>
                     <br>
-                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
-                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    <button class="interview-button btn text-green-500 border-green-500">INTERVIEW</button>
+                    <button class="rejected-button btn ml-4 text-red-500 border-red-500">REJECTED</button>
                 </div>
                 <div class="absolute top-4 right-4">
-                   <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i class="fa-solid fa-trash-can"></i></button>
+                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
+                            class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
 
@@ -107,17 +111,18 @@
                     <h3 class="job-name text-[#002C5C] font-bold text-xl">WebFlow Agency</h3>
                     <p class="job-title text-[#64748B]">Web Designer & Developer</p>
                     <p class="salary text-[#64748B]">Los Angeles, CA • Part-time • $80,000 - $120,000</p>
-                    <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">NOT APPLIED</p>
-                    <p class="description text-[#565a5f] pt-4">Create stunning web experiences for high-profile clients. Must have
+                    <p class="condition border w-[150px] text-center py-2 rounded-md mt-4 font-semibold">NOT APPLIED</p>
+                    <p class="description text-[#565a5f] pt-4">Create stunning web experiences for high-profile clients.
+                        Must have
                         portfolio and experience with modern web design
                         trends.</p>
                     <br>
-                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
-                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    <button class="interview-button btn text-green-500 border-green-500">INTERVIEW</button>
+                    <button class="rejected-button btn ml-4 text-red-500 border-red-500">REJECTED</button>
                 </div>
                 <div class="absolute top-4 right-4">
-                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
+                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
+                            class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
 
@@ -132,15 +137,16 @@
                         •
                         $125,000 - $165,000</p>
                     <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">NOT APPLIED</p>
-                    <p class="description text-[#565a5f] pt-4">Transform complex data into compelling visualizations. Required
+                    <p class="description text-[#565a5f] pt-4">Transform complex data into compelling visualizations.
+                        Required
                         skills: D3.js, React, and strong analytical thinking.</p>
                     <br>
-                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
-                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    <button class="interview-button btn text-green-500 border-green-500">INTERVIEW</button>
+                    <button class="rejected-button btn ml-4 text-red-500 border-red-500">REJECTED</button>
                 </div>
                 <div class="absolute top-4 right-4">
-                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
+                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
+                            class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
 
@@ -155,16 +161,18 @@
                         •
                         $140,000 - $190,000</p>
                     <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">NOT APPLIED</p>
-                    <p class="description text-[#565a5f] pt-4">Design and maintain scalable backend systems using Python and AWS.
+                    <p class="description text-[#565a5f] pt-4">Design and maintain scalable backend systems using Python
+                        and
+                        AWS.
                         Work with modern DevOps practices and cloud
                         infrastructure.</p>
                     <br>
-                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
-                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    <button class="interview-button btn text-green-500 border-green-500">INTERVIEW</button>
+                    <button class="rejected-button btn ml-4 text-red-500 border-red-500">REJECTED</button>
                 </div>
                 <div class="absolute top-4 right-4">
-                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
+                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
+                            class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
 
@@ -179,16 +187,18 @@
                         •
                         $110,000 - $150,000</p>
                     <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">NOT APPLIED</p>
-                    <p class="description text-[#565a5f] pt-4">Create beautiful and functional user interfaces for our suite of
+                    <p class="description text-[#565a5f] pt-4">Create beautiful and functional user interfaces for our
+                        suite
+                        of
                         products. Strong design skills and frontend development
                         expertise required.</p>
                     <br>
-                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
-                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    <button class="interview-button btn text-green-500 border-green-500">INTERVIEW</button>
+                    <button class="rejected-button btn ml-4 text-red-500 border-red-500">REJECTED</button>
                 </div>
                 <div class="absolute top-4 right-4">
-                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
+                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
+                            class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
 
@@ -203,16 +213,17 @@
                         •
                         $130,000 - $170,00</p>
                     <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">NOT APPLIED</p>
-                    <p class="description text-[#565a5f] pt-4">Build enterprise applications with JavaScript and modern frameworks.
+                    <p class="description text-[#565a5f] pt-4">Build enterprise applications with JavaScript and modern
+                        frameworks.
                         We offer competitive compensation, health
                         insurance, and professional development opportunities.</p>
                     <br>
-                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
-                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    <button class="interview-button btn text-green-500 border-green-500">INTERVIEW</button>
+                    <button class="rejected-button btn ml-4 text-red-500 border-red-500">REJECTED</button>
                 </div>
                 <div class="absolute top-4 right-4">
-                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
+                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
+                            class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
 
@@ -227,16 +238,17 @@
                         •
                         $120,000 - $160,000</p>
                     <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">NOT APPLIED</p>
-                    <p class="description text-[#565a5f] pt-4">Join our fast-growing startup and work on our core platform.
+                    <p class="description text-[#565a5f] pt-4">Join our fast-growing startup and work on our core
+                        platform.
                         Experience with Node.js and React required. Great benefits
                         and equity package included.</p>
                     <br>
-                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
-                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    <button class="interview-button btn text-green-500 border-green-500">INTERVIEW</button>
+                    <button class="rejected-button btn ml-4 text-red-500 border-red-500">REJECTED</button>
                 </div>
                 <div class="absolute top-4 right-4">
-                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
+                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
+                            class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
 
@@ -251,16 +263,17 @@
                         •
                         $130,000 - $175,000</p>
                     <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">NOT APPLIED</p>
-                    <p class="description text-[#565a5f] pt-4">We are looking for an experienced Frontend Developer to build
+                    <p class="description text-[#565a5f] pt-4">We are looking for an experienced Frontend Developer to
+                        build
                         scalable web applications using React and TypeScript. You
                         will work with a talented team on cutting-edge projects.</p>
                     <br>
-                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
-                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    <button class="interview-button btn text-green-500 border-green-500">INTERVIEW</button>
+                    <button class="rejected-button btn ml-4 text-red-500 border-red-500">REJECTED</button>
                 </div>
                 <div class="absolute top-4 right-4">
-                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
+                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
+                            class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
 
@@ -281,3 +294,4 @@
 </body>
 
 </html>
+
