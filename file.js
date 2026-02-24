@@ -21,18 +21,18 @@ let interviewList = [];
 let rejectedList = [];
 let currentStatus = "all";
 
+// console.log(rejectedList);
 
 function calculateCount() {
     totalCount.innerText = allCards.children.length;
     jobCount.innerText = allCards.children.length + " jobs";
     interviewCount.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
-
 }
 calculateCount();
 
 
-// step-$: showing file---
+// step-4: showing file---
 function toggleStyle(id) {
     // remove blue bg for all button ---- 
     allBtn.classList.remove('bg-[#3B82F6]', 'text-white');
@@ -55,35 +55,51 @@ function toggleStyle(id) {
 
 
     if (id == 'interview-btn') {
-        allCards.classList.add('hidden');
-        filterSection.classList.remove('hidden');
-        reanderInterview();
+        if (interviewList.length == 0) {
+            noJobSection.classList.remove('hidden');
+            allCards.classList.add('hidden');
+            filterSection.classList.add('hidden');
+        }
+        else if (interviewList.length > 0) {
+            noJobSection.classList.add('hidden');
+            allCards.classList.add('hidden');
+            filterSection.classList.remove('hidden');
+            reanderInterview();
+        }
     }
     else if (id == 'btn-all') {
         allCards.classList.remove('hidden');
         filterSection.classList.add('hidden');
+        noJobSection.classList.add('hidden');
     }
     else if (id == 'rejected-btn') {
-        allCards.classList.add('hidden');
-        filterSection.classList.remove('hidden');
-        reanderRejected();
+        if (rejectedList.length == 0) {
+            noJobSection.classList.remove('hidden');
+            allCards.classList.add('hidden');
+            filterSection.classList.add('hidden');
+        }
+        else if (rejectedList.length > 0) {
+            noJobSection.classList.add('hidden');
+            allCards.classList.add('hidden');
+            filterSection.classList.remove('hidden');
+            reanderRejected();
+        }
     }
-
 }
 
 
 mainContainer.addEventListener('click', function (event) {
     if (event.target.classList.contains('interview-button')) {
-        const parentNode = event.target.parentNode;
-        // console.log(parentNode);
+        const parentNode = event.target.parentNode.parentNode;
 
-        const jobName = document.querySelector(".job-name").innerText;
-        // console.log(jobName);
+        const jobName = parentNode.querySelector(".job-name").innerText;
 
-        const jobTitle = document.querySelector(".job-title").innerText;
-        const salary = document.querySelector(".salary").innerText;
-        const condition = document.querySelector(".condition").innerText;
-        const description = document.querySelector(".description").innerText;
+        const jobTitle = parentNode.querySelector(".job-title").innerText;
+
+        const salary = parentNode.querySelector(".salary").innerText;
+
+        const condition = parentNode.querySelector(".condition").innerText;
+        const description = parentNode.querySelector(".description").innerText;
 
         parentNode.querySelector(".condition").innerText = "Interview";
 
@@ -93,7 +109,7 @@ mainContainer.addEventListener('click', function (event) {
             salary,
             condition: "Interview",
             description
-        }
+        };
         // console.log(cardInfo);
 
         const jobExist = interviewList.find(item => item.jobName == cardInfo.jobName);
@@ -102,28 +118,33 @@ mainContainer.addEventListener('click', function (event) {
         if (!jobExist) {
             interviewList.push(cardInfo);
         }
+        // console.log(interviewList);
 
         // removing the jobname from rejectedList----
         rejectedList = rejectedList.filter(item => item.jobName != cardInfo.jobName);
 
-        calculateCount();
+
+        // console.log(rejectedList);
+
 
         if (currentStatus == "rejected-btn") {
             reanderRejected();
         }
+
+        calculateCount();
     }
 
     else if (event.target.classList.contains('rejected-button')) {
-        const parentNode = event.target.parentNode;
+        const parentNode = event.target.parentNode.parentNode;
         // console.log(parentNode);
 
-        const jobName = document.querySelector(".job-name").innerText;
+        const jobName = parentNode.querySelector(".job-name").innerText;
         // console.log(jobName);
 
-        const jobTitle = document.querySelector(".job-title").innerText;
-        const salary = document.querySelector(".salary").innerText;
-        const condition = document.querySelector(".condition").innerText;
-        const description = document.querySelector(".description").innerText;
+        const jobTitle = parentNode.querySelector(".job-title").innerText;
+        const salary = parentNode.querySelector(".salary").innerText;
+        const condition = parentNode.querySelector(".condition").innerText;
+        const description = parentNode.querySelector(".description").innerText;
 
         parentNode.querySelector(".condition").innerText = "Rejected";
 
@@ -137,6 +158,7 @@ mainContainer.addEventListener('click', function (event) {
         // console.log(cardInfo);
 
         const jobExist = rejectedList.find(item => item.jobName == cardInfo.jobName);
+        // console.log(jobExist);
 
 
         if (!jobExist) {
@@ -145,11 +167,12 @@ mainContainer.addEventListener('click', function (event) {
 
         interviewList = interviewList.filter(item => item.jobName != cardInfo.jobName);
 
-        calculateCount();
 
         if (currentStatus == "interview-btn") {
             reanderInterview();
         }
+
+        calculateCount();
     }
 })
 
@@ -167,9 +190,10 @@ function reanderInterview() {
                     <p class="salary text-[#64748B]">${interview.salary}</p>
                     <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">${interview.condition}</p>
                     <p class="description text-[#565a5f] pt-4">${interview.description}</p>
-                    <br>
-                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
-                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    <div class="mt-4">
+                        <button class="interview-button btn text-green-500 border-green-500">INTERVIEW</button>
+                        <button class="rejected-button btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    </div>
                 </div>
                 <div class="absolute top-4 right-4">
                     <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
@@ -194,9 +218,10 @@ function reanderRejected() {
                     <p class="salary text-[#64748B]">${rejected.salary}</p>
                     <p class="condition mt-4 border w-[150px] text-center py-2 rounded-md font-semibold">${rejected.condition}</p>
                     <p class="description text-[#565a5f] pt-4">${rejected.description}</p>
-                    <br>
-                    <button class="btn text-green-500 border-green-500">INTERVIEW</button>
-                    <button class="btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    <div class="mt-4">
+                        <button class="interview-button btn text-green-500 border-green-500">INTERVIEW</button>
+                        <button class="rejected-button btn ml-4 text-red-500 border-red-500">REJECTED</button>
+                    </div>
                 </div>
                 <div class="absolute top-4 right-4">
                    <button class="btn border px-2.5 py-2 rounded-full opacity-70"><i
